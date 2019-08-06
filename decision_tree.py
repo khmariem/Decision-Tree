@@ -152,9 +152,9 @@ class DecisionTree:
 ############################################################# The test class ##################################################################
 
 class TestDT(unittest.TestCase):
-
-    global dataset
-    dataset = [['sunny', 'hot', 'high' , 'weak','no'],
+    
+    def setUp(self):
+        self.dataset = [['sunny', 'hot', 'high' , 'weak','no'],
             ['sunny', 'hot', 'high' , 'strong','no'],
             ['overcast', 'hot', 'high' , 'weak','yes'],
             ['rain', 'mild', 'high' , 'weak','yes'],
@@ -171,10 +171,10 @@ class TestDT(unittest.TestCase):
 
     def test_build(self):
         C = DecisionTree()
-        self.assertEqual(C.build_tree(dataset),{'overcast': 'yes', 'rain': {'weak': 'yes', 'strong': 'no'}, 'sunny': {'normal': 'yes', 'high': 'no'}}
+        self.assertEqual(C.build_tree(self.dataset),{'overcast': 'yes', 'rain': {'weak': 'yes', 'strong': 'no'}, 'sunny': {'normal': 'yes', 'high': 'no'}}
 )
 
 
 if __name__ == '__main__':
     unittest.main()
-    
+
