@@ -1,6 +1,7 @@
 from __future__ import division
 import numpy as np
 import copy
+import unittest
 
 #######################################The decision tree Algorithm######################################
 #cpt=0
@@ -147,3 +148,33 @@ class DecisionTree:
                 group[val]=[data[i][:attribute]+data[i][attribute+1:]]
 
         return group
+
+############################################################# The test class ##################################################################
+
+class TestDT(unittest.TestCase):
+
+    global dataset
+    dataset = [['sunny', 'hot', 'high' , 'weak','no'],
+            ['sunny', 'hot', 'high' , 'strong','no'],
+            ['overcast', 'hot', 'high' , 'weak','yes'],
+            ['rain', 'mild', 'high' , 'weak','yes'],
+            ['rain', 'cool', 'normal' , 'weak','yes'],
+            ['rain', 'cool', 'normal' , 'strong','no'],
+            ['overcast', 'cool', 'normal' , 'strong','yes'],
+            ['sunny', 'mild', 'high' , 'weak','no'],
+            ['sunny', 'cool', 'normal' , 'weak','yes'],
+            ['rain', 'mild', 'normal' , 'weak','yes'],
+            ['sunny', 'mild', 'normal' , 'strong','yes'],
+            ['overcast', 'mild', 'high' , 'strong','yes'],
+            ['overcast', 'hot', 'normal' , 'weak','yes'],
+            ['rain', 'mild', 'high' , 'strong','no']]
+
+    def test_build(self):
+        C = DecisionTree()
+        self.assertEqual(C.build_tree(dataset),{'overcast': 'yes', 'rain': {'weak': 'yes', 'strong': 'no'}, 'sunny': {'normal': 'yes', 'high': 'no'}}
+)
+
+
+if __name__ == '__main__':
+    unittest.main()
+    
